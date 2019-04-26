@@ -1,13 +1,16 @@
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import SnippetDetail, SnippetList, UserList, UserDetail
+from .views import SnippetDetail, SnippetList, UserList, UserDetail, api_root, SnippetHighlight
 
 urlpatterns = [
 
-    path('snippets/', SnippetList.as_view(), name='listview'),
-    path('snippets/<int:pk>/', SnippetDetail.as_view(), name='detailview'),
-    path('user/', UserList.as_view()),
-    path('user/<int:pk>/', UserDetail.as_view())
+    path('snippets/', SnippetList.as_view(), name='snippet-list'),
+    path('snippets/<int:pk>/', SnippetDetail.as_view(), name='snippet-detail'),
+    path('users/', UserList.as_view(), name='user-list'),
+    path('users/<int:pk>/', UserDetail.as_view(), name='user-detail'),
+    path('', api_root),
+    path('snippets/<int:pk>/highlight/',
+         SnippetHighlight.as_view(), name='snippet-highlight')
 
 ]
 
